@@ -1,6 +1,5 @@
 services:
   # Database service - MariaDB
-  # Note: You can switch to PostgreSQL by uncommenting the postgres service below
   db:
     image: mariadb:lts
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
@@ -20,22 +19,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # Uncomment this section to use PostgreSQL instead of MariaDB
-  # postgres:
-  #   image: postgres:alpine
-  #   restart: unless-stopped
-  #   volumes:
-  #     - db:/var/lib/postgresql/data:Z
-  #   environment:
-  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme}
-  #     - POSTGRES_DB=${POSTGRES_DB:-nextcloud}
-  #     - POSTGRES_USER=${POSTGRES_USER:-nextcloud}
-  #   healthcheck:
-  #     test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
-  #     interval: 10s
-  #     timeout: 5s
-  #     retries: 5
-
   # Redis for caching
   redis:
     image: redis:alpine
@@ -46,14 +29,11 @@ services:
       timeout: 5s
       retries: 5
 
-  # Nextcloud application
-  # Using official pre-built image (faster and more reliable)
-  # To build from local Dockerfile instead, uncomment the build section and comment the image line
+  # Nextcloud application - built from local Dockerfile
   app:
-    image: nextcloud:32-apache
-    # build:
-    #   context: .
-    #   dockerfile: 32/apache/Dockerfile
+    build:
+      context: .
+      dockerfile: 32/apache/Dockerfile
     restart: unless-stopped
     ports:
       - "${NEXTCLOUD_PORT:-8080}:80"
@@ -81,14 +61,11 @@ services:
       timeout: 10s
       retries: 3
 
-  # Nextcloud cron job
-  # Using official pre-built image (faster and more reliable)
-  # To build from local Dockerfile instead, uncomment the build section and comment the image line
+  # Nextcloud cron job - built from local Dockerfile
   cron:
-    image: nextcloud:32-apache
-    # build:
-    #   context: .
-    #   dockerfile: 32/apache/Dockerfile
+    build:
+      context: .
+      dockerfile: 32/apache/Dockerfile
     restart: unless-stopped
     volumes:
       - nextcloud:/var/www/html

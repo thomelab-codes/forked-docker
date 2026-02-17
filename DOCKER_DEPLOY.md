@@ -58,6 +58,19 @@ On first access, Nextcloud will complete its setup automatically using the crede
 
 ## Configuration Options
 
+### Building from Source vs Using Pre-built Images
+
+By default, `docker-compose.yml` uses the official pre-built Nextcloud images from Docker Hub, which is faster and more reliable.
+
+If you want to build Nextcloud from the local Dockerfiles in this repository:
+
+```bash
+# Use the build variant
+docker compose -f docker-compose.build.yml up -d
+```
+
+Note: Building from source may fail if there are issues in the Dockerfiles. Use the default `docker-compose.yml` for a more reliable experience.
+
 ### Using PostgreSQL Instead of MariaDB
 
 1. Edit `docker-compose.yml`:
