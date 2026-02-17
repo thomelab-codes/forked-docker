@@ -1,0 +1,11 @@
+# Environment files with sensitive data
+.env
+
+# Docker volumes and data
+volumes/
+
+# Temporary files
+*.log
+*.tmp
+*~
+.DS_Store

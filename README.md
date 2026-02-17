@@ -15,6 +15,41 @@ A safe home for all your data. Access & share your files, calendars, contacts, m
 
 ⚠️⚠️⚠️ This image is maintained by community volunteers and designed for expert use. For quick and easy deployment that supports the full set of Nextcloud Hub features, use the [Nextcloud All-in-One docker container](https://github.com/nextcloud/all-in-one#nextcloud-all-in-one) maintained by Nextcloud GmbH.
 
+## 🚀 Quick Start with Docker Compose
+
+Get Nextcloud up and running in 3 simple steps:
+
+```bash
+# 1. Copy environment template and set your passwords
+cp .env.example .env
+nano .env  # Edit passwords and configuration
+
+# 2. Build and start services
+docker compose up -d
+
+# 3. Access Nextcloud at http://localhost:8080
+```
+
+**That's it!** For detailed instructions, see [DOCKER_DEPLOY.md](./DOCKER_DEPLOY.md) or continue reading below.
+
+### What You Get
+- ✅ Latest Nextcloud (version 32) using official Docker images
+- ✅ MariaDB database (or PostgreSQL option)
+- ✅ Redis for caching
+- ✅ Automatic background cron jobs
+- ✅ Easy configuration via `.env` file
+- ✅ Persistent data in Docker volumes
+
+**Using Makefile shortcuts:**
+```bash
+make setup  # Create .env from template
+make up     # Start services
+make logs   # View logs
+make occ CMD="user:list"  # Run occ commands
+```
+
+---
+
 ## Table of Contents
 - [What is Nextcloud?](#what-is-nextcloud)
 - [How to use this image](#how-to-use-this-image)
