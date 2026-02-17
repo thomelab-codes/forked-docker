@@ -22,15 +22,17 @@ This guide will help you quickly deploy Nextcloud using Docker Compose with offi
    cp .env.example .env
    ```
 
-3. Edit `.env` file and set your own passwords and configuration:
+3. **⚠️ IMPORTANT - Security:** Edit `.env` file and set your own strong passwords:
    ```bash
    nano .env  # or use your preferred editor
    ```
 
-   **Important:** Change all default passwords, especially:
-   - `MYSQL_ROOT_PASSWORD`
-   - `MYSQL_PASSWORD`
-   - `NEXTCLOUD_ADMIN_PASSWORD`
+   **You MUST change all default passwords, especially:**
+   - `MYSQL_ROOT_PASSWORD` - Use a strong password (20+ characters recommended)
+   - `MYSQL_PASSWORD` - Use a strong password (20+ characters recommended)
+   - `NEXTCLOUD_ADMIN_PASSWORD` - Use a strong password (20+ characters recommended)
+
+   **DO NOT use the default 'changeme' passwords in production!**
 
 ### Step 2: Build and Start Services
 
@@ -201,13 +203,23 @@ cp .env.example .env
 docker compose up -d
 ```
 
-## Security Notes
+## ⚠️ Security Notes
 
-1. **Never commit `.env` file** - It contains sensitive passwords
-2. **Change all default passwords** before deployment
-3. **Use HTTPS** in production with a reverse proxy
-4. **Regular backups** - Back up the Docker volumes regularly
-5. **Keep updated** - Regularly update to the latest Nextcloud version
+**CRITICAL - Before Production Deployment:**
+
+1. **Never commit `.env` file** - It contains sensitive passwords. The `.gitignore` file is configured to exclude it.
+2. **Change ALL default passwords** - The default passwords in `.env.example` are placeholders and MUST be changed:
+   - Use passwords with at least 20 characters
+   - Include uppercase, lowercase, numbers, and special characters
+   - Never use "changeme" or similar weak passwords
+3. **Use HTTPS** in production - Deploy behind a reverse proxy (Nginx, Traefik, Caddy) with valid SSL certificates
+4. **Regular backups** - Back up the Docker volumes regularly:
+   ```bash
+   docker run --rm -v forked-docker_nextcloud:/data -v $(pwd):/backup ubuntu tar czf /backup/nextcloud-backup.tar.gz /data
+   docker run --rm -v forked-docker_db:/data -v $(pwd):/backup ubuntu tar czf /backup/db-backup.tar.gz /data
+   ```
+5. **Keep updated** - Regularly update to the latest Nextcloud version and rebuild containers
+6. **Limit access** - If not using a reverse proxy, bind to localhost only: `127.0.0.1:8080:80`
 
 ## Support
 
