@@ -1,6 +1,6 @@
 # Docker Compose Deployment Guide
 
-This guide will help you quickly deploy Nextcloud using Docker Compose with locally built images.
+This guide will help you quickly deploy Nextcloud using Docker Compose with official pre-built images from Docker Hub.
 
 ## Quick Start
 
@@ -13,7 +13,7 @@ This guide will help you quickly deploy Nextcloud using Docker Compose with loca
 
 1. Clone this repository (if not already done):
    ```bash
-   git clone https://github.com/thomelab-codes/forked-docker.git
+   git clone <repository-url>
    cd forked-docker
    ```
 
@@ -41,7 +41,7 @@ docker compose up -d
 ```
 
 This command will:
-- Build the Nextcloud Apache image from the Dockerfile in `32/apache/`
+- Pull the Nextcloud Apache image (version 32) from Docker Hub
 - Pull the required database (MariaDB) and Redis images
 - Create and start all containers
 - Set up the necessary volumes for persistent data
@@ -214,7 +214,7 @@ docker compose up -d
 For more information:
 - [Nextcloud Documentation](https://docs.nextcloud.com/)
 - [Docker Hub - Nextcloud](https://hub.docker.com/_/nextcloud)
-- [GitHub Issues](https://github.com/thomelab-codes/forked-docker/issues)
+- [Nextcloud Community Forum](https://help.nextcloud.com/)
 
 ## Examples
 

@@ -33,7 +33,7 @@ docker compose up -d
 **That's it!** For detailed instructions, see [DOCKER_DEPLOY.md](./DOCKER_DEPLOY.md) or continue reading below.
 
 ### What You Get
-- ✅ Latest Nextcloud (version 32) built from source
+- ✅ Latest Nextcloud (version 32) using official Docker images
 - ✅ MariaDB database (or PostgreSQL option)
 - ✅ Redis for caching
 - ✅ Automatic background cron jobs
